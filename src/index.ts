@@ -1,5 +1,18 @@
-console.log("Hello, World!");
+import express from "express";
+import { createServer } from "http";
+import { Server } from "socket.io";
 import si from "systeminformation";
-// si.cpu().then((data) => console.log(data));
-// si.getAllData().then((data) => console.log(data));
-si.processes().then((data) => console.log(data));
+
+si.chassis().then((data) => console.log(data));
+
+const app = express();
+const httpServer = createServer(app);
+const io = new Server(httpServer, {
+    /* options */
+});
+
+io.on("connection", (socket) => {
+    // ...
+});
+
+httpServer.listen(3000);
